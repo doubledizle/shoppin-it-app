@@ -1,0 +1,50 @@
+<!-- view engine that handles the todos page html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <section class="todos">
+    <h1 class="todoHeader">Shopping List</h1>
+    <ul>
+        <% todos.forEach( el => { %>
+            <% if (el.completed === false) {%>
+                <li class='todoItem' data-id='<%=el._id%>'>
+                    <span class='not'><%= el.todo %></span>
+                    <span class='fa fa-trash'></span>
+                </li>
+            <% } %>
+        <% }) %>
+    </ul>
+
+    <h1 class="todoHeader">Completed List</h1>
+    <ul>
+        <% todos.forEach( el => { %>
+            <% if (el.completed === true) {%>
+                <li class='todoItem' data-id='<%=el._id%>'>
+                    <span class='completed'><%= el.todo %></span>
+                    <span class='fa fa-trash'></span>
+                </li>
+            <% } %>
+        <% }) %>    
+    </ul>
+
+    <h2><%= user.userName.toUpperCase() %> has <%= left %> things left to shop for.</h2>
+
+    <form action="/todos/createTodo" method='POST'>
+        <input type="text" placeholder="Enter grocery item" name='todoItem'>
+        <input type="submit">
+    </form>
+    <a href="/logout">Logout</a>
+  </section>
+
+
+<script src="js/main.js"></script>
+</body>
+</html>
